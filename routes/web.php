@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('cliente/index', 'ClienteController@index');
+Route::get('cliente/create', 'ClienteController@create');
+Route::post('cliente/store', 'ClienteController@store');
+Route::get('cliente/edit/{id}', 'ClienteController@edit');
+Route::post('cliente/update/{id}', 'ClienteController@update');
+Route::get('cliente/delete/{id}', 'ClienteController@delete');
