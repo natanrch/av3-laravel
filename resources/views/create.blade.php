@@ -2,7 +2,11 @@
 
 @section('content')
 
-<form>
+@if(old('nome'))
+<div>Usuário {{old('nome')}} cadastrado com sucesso!</div>
+@endif
+
+<form method="post" action="/cliente/store">
 	{!! csrf_field() !!}
 	<input type="text" name="nome" placeholder="Digite o nome">
 	<label for="data_de_nascimento">Data de Nascimento</label>

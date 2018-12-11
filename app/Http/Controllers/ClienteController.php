@@ -34,18 +34,24 @@ class ClienteController extends Controller
     		'cpf' => 'required|max:11'
     	]);
 
-    	$cliente = new Cliente;
-    	$cliente->nome = $request->nome;
-    	$cliente->data_de_nascimento = $request->data_de_nascimento;
-    	$cliente->estado_civil = $request->estado_civil;
-    	$cliente->telefone = $request->telefone;
-    	$cliente->endereco = $request->endereco;
-    	$cliente->usuario = $request->usuario;
-    	$cliente->senha = $request->senha;
-    	$cliente->cpf = $request->cpf;
-    	$cliente->save();
+    	if($validador->passes()) {
 
-    	return redirect('cliente/create')->withInput();
+	    	$cliente = new Cliente;
+	    	$cliente->nome = $request->nome;
+	    	$cliente->data_de_nascimento = $request->data_de_nascimento;
+	    	$cliente->estado_civil = $request->estado_civil;
+	    	$cliente->telefone = $request->telefone;
+	    	$cliente->endereco = $request->endereco;
+	    	$cliente->usuario = $request->usuario;
+	    	$cliente->senha = $request->senha;
+	    	$cliente->cpf = $request->cpf;
+	    	$cliente->save();
+    		return redirect('cliente/create')->withInput();
+    	}
+
+    	return redirect()->back()->withInput()->withErrors($validador);
+
+
     }
 
     public function edit($id)
@@ -58,6 +64,18 @@ class ClienteController extends Controller
 
     public function update(Request $request)
     {
+    	$validador = \Validator::make($request->all(),
+    	[
+    		'nome' => 'required',
+    		'data_de_nascimento' => 'required|date',
+    		'estado_civil' => 'required',
+    		'telefone' => 'required',
+    		'endereco' => 'required',
+    		'usuario' => 'required',
+    		'senha' => 'required|min:6',
+    		'cpf' => 'required|max:11'
+    	]);
+    	
     	$cliente = Cliente::find($request->id);
     	$cliente->nome = $request->nome;
     	$cliente->data_de_nascimento = $request->data_de_nascimento;
