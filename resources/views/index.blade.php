@@ -1,8 +1,11 @@
 @extends('principal')
 
 @section('content')
-
-<table>
+<div class="container">
+	<div class="row">
+    <div class="col-12">
+    	<h1 class="text-success">cadastro de cliente </h1>
+<table class="table table-bordered">
 	<thead>
 		<tr>
 			<th>Nome</th>
@@ -32,3 +35,6 @@
 		@endforeach
 	</tbody>
 </table>
+</div>
+    </div>
+</div>
