@@ -75,7 +75,7 @@ class ClienteController extends Controller
     		'senha' => 'required|min:6',
     		'cpf' => 'required|max:11'
     	]);
-    	
+
     	$cliente = Cliente::find($request->id);
     	$cliente->nome = $request->nome;
     	$cliente->data_de_nascimento = $request->data_de_nascimento;
@@ -87,7 +87,7 @@ class ClienteController extends Controller
     	$cliente->cpf = $request->cpf;
     	$cliente->save();
 
-    	return redirect('cliente/edit')->withInput();
+    	return redirect('cliente/edit/'.$request->id)->withInput();
     }
 
     public function delete($id)
