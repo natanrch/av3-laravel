@@ -22,6 +22,18 @@ class ClienteController extends Controller
 
     public function store(Request $request)
     {
+    	$validador = \Validator::make($request->all(),
+    	[
+    		'nome' => 'required',
+    		'data_de_nascimento' => 'required|date',
+    		'estado_civil' => 'required',
+    		'telefone' => 'required',
+    		'endereco' => 'required',
+    		'usuario' => 'required',
+    		'senha' => 'required|min:6',
+    		'cpf' => 'required|max:11'
+    	]);
+
     	$cliente = new Cliente;
     	$cliente->nome = $request->nome;
     	$cliente->data_de_nascimento = $request->data_de_nascimento;
